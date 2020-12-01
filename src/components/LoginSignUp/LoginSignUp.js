@@ -24,8 +24,9 @@ const LoginSignUp = () => {
     const signUpEmailRef = useRef();
     const signUpPasswordRef = useRef();
     const signUpPasswordConfirmRef = useRef();
+    const signUpUserNameRef = useRef();
     
-    const {signUp, signIn} = useGlobalContext();
+    const {signUp, signIn, setGithubUser} = useGlobalContext();
     
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -39,7 +40,10 @@ const LoginSignUp = () => {
         try {
             setError('');
             setLoading(true)
-            await signUp(signUpEmailRef.current.value, signUpPasswordRef.current.value, signUpGithubNameRef.current.value);
+            let result = await signUp(signUpEmailRef.current.value, signUpPasswordRef.current.value, signUpGithubNameRef.current.value, signUpUserNameRef.current.value);
+            await result.user.updateProfile({
+                displayName: `${signUpGithubNameRef.current.value};#${signUpUserNameRef.current.value}`
+            })
             setLoading(false);
             history.push('/');
         }
@@ -82,6 +86,10 @@ const LoginSignUp = () => {
                     </form>
                     <form action="#" className="sign-up-form">
                         <h2 className="title">Sign up</h2>
+                        <div className="input-field">
+                        <i className="fas fa-user"></i>
+                        <input type="text" ref={signUpUserNameRef} placeholder="Your Name" />
+                        </div>
                         <div className="input-field">
                         <i className="fas fa-envelope"></i>
                         <input type="email" ref={signUpEmailRef} placeholder="Email" />

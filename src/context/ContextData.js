@@ -1,5 +1,8 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {auth} from '../client/firebase';
+import mockUser from './MockData/User';
+import mockRepos from './MockData/mockRepos';
+import mockFollowers from './MockData/mockFollowers';
 
 const GlobalContextProvider = React.createContext();
 
@@ -12,16 +15,13 @@ export function ContextDataProvider({children}){
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [githubUser, setGithubUser] = useState('');
+    const [githubUserDetails, setGithubUserDetails] = useState(mockUser);
+    const [repos, setRepos] = useState(mockRepos);
+    const [followers, setFollowers] = useState(mockFollowers);
 
-    function signUp(email, password, githubname){
+
+    function signUp(email, password){
         return auth.createUserWithEmailAndPassword(email, password)
-        .then(function(result) {
-            return result.user.updateProfile({
-                displayName: githubname
-            })
-        }).catch(function(error) {
-            console.log(error);
-        });
     }
 
     function signIn(email, password){
@@ -35,9 +35,6 @@ export function ContextDataProvider({children}){
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user);
-            if(user !== null){
-                setGithubUser(user.displayName);
-            }
             setLoading(false);
         })
         return unsubscribe;
@@ -49,12 +46,16 @@ export function ContextDataProvider({children}){
         signIn,
         logout,
         setGithubUser,
-        githubUser
+        githubUser,
+        githubUserDetails,
+        repos,
+        followers,
+        loading
     }
 
     return (
         <GlobalContextProvider.Provider value={value}>
-            {!loading && children}
+            {children}
         </GlobalContextProvider.Provider>
     )
 }

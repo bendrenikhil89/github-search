@@ -1,0 +1,92 @@
+.follower__container{
+    border: 1px solid #ccc;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.follower__card__title{
+    padding: 10px 20px;
+    width:100%;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+}
+
+.follower__card__body{
+    padding: 10px 25px;
+    width:100%;
+    background: #fff;
+    height: 100%;
+    max-height: 260px;
+}
+
+.follower__card__body:hover{
+    overflow-y: scroll;
+}
+
+.follower__photo__row {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+  }
+  
+.follower__name__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.follower__photo__row img{
+    border-radius: 50%;
+    height:60px;
+    width:60px;
+    margin-right: 15px;
+}
+
+.follower__photo {
+    display: flex;
+}
+
+.follower__follow {
+    flex: 1;
+    justify-content: flex-end;
+    display: flex;
+    align-items: flex-start;
+    z-index: 1;
+    align-items: center;
+}
+
+.follower__follow a {
+    padding: 6px 20px;
+    border-radius: 15px;
+    background: #2a92e6;
+    color: #fff;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.follower__follow a:hover{
+    background: #047edf;
+    padding: 5px 19px;
+    border: 1px solid #2a92e6;
+}
+
+.follower__card__body::before {
+    content: "";
+    position: absolute;
+    background: linear-gradient(to right, #7ebff50d, #047edf0f 99%) !important;
+    width: 315px;
+    height: 520px;
+    z-index: 0;
+    transform: rotate(42deg);
+    right: -133px;
+    top: -53px;
+    border-radius: 35px;
+    overflow: hidden;
+}
+
+.follower__name__details{
+    font-size: 15px;
+}

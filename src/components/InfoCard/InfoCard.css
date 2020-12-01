@@ -1,0 +1,85 @@
+.infocard__container{
+    max-width: 1300px;
+    margin:40px auto;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.infocard__wrapper{
+    border-radius: 8px;
+}
+
+.infocard__gradient-red{
+    background: linear-gradient(to right, #f38a8a, #ce3f3f) !important;
+}
+
+.infocard__gradient-blue{
+    background: linear-gradient(to right, #7ebff5, #047edf 99%) !important;
+}
+
+.infocard__gradient-green{
+    background: linear-gradient(to right, #84d9d2, #07cdae) !important;
+}
+
+.infocard__gradient-yellow{
+    background: linear-gradient(to right, #f3cd8a, #ed8936) !important;
+}
+
+.infocard__card-img-absolute{
+    height:125px;
+    float: right;
+}
+
+.infocard__body{
+    height:125px;
+    flex:3;
+}
+
+.infocard__text {
+    padding: 0px 25px 30px 25px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.infocard__number {
+    padding: 25px 25px 0px 25px;
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.infocard__icon{
+    position: absolute;
+    top:50%;
+    right: -75px;
+}
+
+@media screen and (max-width:568px){
+    .infocard__container{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (min-width:800px) and (max-width:1000px){
+    .infocard__container{
+        grid-template-columns: repeat(2, minmax(280px, 1fr));
+    }
+}
+
+@media screen and (min-width:1001px) and (max-width:1240px){
+    .infocard__container{
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media screen and (max-width:1365px){
+    .infocard__container{
+        margin:40px 20px;
+    }
+}
