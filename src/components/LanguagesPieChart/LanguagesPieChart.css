@@ -1,0 +1,13 @@
+.languages__container{
+    border: 1px solid #ccc;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.languages__card__title{
+    padding: 10px 20px;
+    width:100%;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+}

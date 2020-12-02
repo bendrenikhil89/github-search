@@ -6,6 +6,8 @@ import InfoCards from '../InfoCard/InfoCards';
 import './Dashboard.css';
 import User from '../User/User';
 import Followers from '../Followers/Followers';
+import LanguagesPieChart from '../LanguagesPieChart/LanguagesPieChart';
+import MostPopularBarChart from '../MostPopularBar/MostPopularBar';
 
 
 const Dashboard = () => {
@@ -32,6 +34,10 @@ const Dashboard = () => {
             <div className="user-followers-container">
                 <User githubUserDetails={githubUserDetails} />
                 <Followers followers={followers} />
+            </div>
+            <div className="charts-container">
+                <div className="charts__languages"><LanguagesPieChart repos={repos} /></div>
+                <div className="charts__star__projects"><MostPopularBarChart repos={repos} /></div>
             </div>
         </div>
     )
