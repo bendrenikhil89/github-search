@@ -5,17 +5,18 @@ import Dashboard from './components/Dashboard/Dashboard';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import {useGlobalContext} from './context/ContextData';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 
 function App() {
   const {loading} = useGlobalContext();
   return (
   (!loading ? <Router>
       <Switch>
-        <PrivateRoute path="/" exact component={Dashboard} />
         <Route path="/login" exact component={LoginSignUp} />
+        <PrivateRoute path="/" exact component={Dashboard} />
         <Route path="*" exact component={PageNotFound} />
       </Switch>
-    </Router> : null )
+    </Router> : <LoadingSpinner /> )
   );
 }
 

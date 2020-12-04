@@ -26,10 +26,11 @@ const LoginSignUp = () => {
     const signUpPasswordConfirmRef = useRef();
     const signUpUserNameRef = useRef();
     
-    const {signUp, signIn, setGithubUser} = useGlobalContext();
+    const {signUp, signIn} = useGlobalContext();
     
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [submit, setSubmit] = useState(false);
+    
     const history = useHistory();
 
     async function signUpHandler(e) {
@@ -39,17 +40,28 @@ const LoginSignUp = () => {
         }
         try {
             setError('');
-            setLoading(true)
-            let result = await signUp(signUpEmailRef.current.value, signUpPasswordRef.current.value, signUpGithubNameRef.current.value, signUpUserNameRef.current.value);
-            await result.user.updateProfile({
-                displayName: `${signUpGithubNameRef.current.value};#${signUpUserNameRef.current.value}`
-            })
-            setLoading(false);
+            setSubmit(true);
+            await signUp(signUpEmailRef.current.value, signUpPasswordRef.current.value, signUpGithubNameRef.current.value, signUpUserNameRef.current.value);
             history.push('/');
         }
-        catch {
-            setLoading(false);
-            setError('Failed to create an account.');
+        catch(error) {
+            switch(error.code) {
+                case 'auth/email-already-in-use':
+                    setError(error.message);
+                    break;
+                case 'auth/invalid-email':
+                    setError(error.message);
+                    break;
+                case 'auth/invalid-password':
+                    setError(error.message);
+                    break;
+                case 'auth/internal-error':
+                    setError(error.message);
+                    break;
+                default:
+                    break;
+            }
+            setSubmit(false);
         }
     }
 
@@ -57,14 +69,31 @@ const LoginSignUp = () => {
         e.preventDefault();
         try {
             setError('');
-            setLoading(true)
+            setSubmit(true);
             await signIn(signInEmailRef.current.value, signInPasswordRef.current.value);
-            setLoading(false);
             history.push('/');
         }
-        catch {
-            setLoading(false);
-            setError('Failed to sign in.');
+        catch(error) {
+            switch(error.code) {
+                case 'auth/invalid-email':
+                    setError(error.message);
+                    break;
+                case 'auth/wrong-password':
+                    setError(error.message);
+                    break;
+                case 'auth/user-not-found':
+                    setError(error.message);
+                    break;
+                case 'auth/invalid-password':
+                    setError(error.message);
+                    break;
+                case 'auth/internal-error':
+                    setError(error.message);
+                    break;
+                default:
+                    break;
+            }
+            setSubmit(false);
         }
     }
 
@@ -74,6 +103,11 @@ const LoginSignUp = () => {
                 <div className="signin-signup">
                     <form action="#" className="sign-in-form">
                         <h2 className="title">Sign in</h2>
+
+                        {error ? <div className="signup__alert signup__danger-alert">
+                            <h4>{error}</h4>
+                        </div> : null }
+
                         <div className="input-field">
                         <i className="fas fa-user"></i>
                         <input type="text" ref={signInEmailRef} placeholder="Username" />
@@ -82,10 +116,15 @@ const LoginSignUp = () => {
                         <i className="fas fa-lock"></i>
                         <input type="password" ref={signInPasswordRef} placeholder="Password" />
                         </div>
-                        <input type="submit" onClick={signInHandler} value="Login" className="btn solid" />
+                        <input type="submit" disabled={submit} onClick={signInHandler} value="Login" className="btn solid" />
                     </form>
                     <form action="#" className="sign-up-form">
                         <h2 className="title">Sign up</h2>
+
+                        {error ? <div className="signup__alert signup__danger-alert">
+                            <h4>{error}</h4>
+                        </div> : null }
+
                         <div className="input-field">
                         <i className="fas fa-user"></i>
                         <input type="text" ref={signUpUserNameRef} placeholder="Your Name" />
@@ -106,7 +145,7 @@ const LoginSignUp = () => {
                         <i className="fab fa-github"></i>
                         <input type="text" ref={signUpGithubNameRef} placeholder="Github Name" />
                         </div>
-                        <input type="submit" disabled={loading} onClick={signUpHandler} className="btn" value="Sign up" />
+                        <input type="submit" disabled={submit} onClick={signUpHandler} className="btn" value="Sign up" />
                     </form>
                 </div>
             </div>

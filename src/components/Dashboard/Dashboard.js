@@ -9,9 +9,8 @@ import Followers from '../Followers/Followers';
 import LanguagesPieChart from '../LanguagesPieChart/LanguagesPieChart';
 import MostPopularBarChart from '../MostPopularBar/MostPopularBar';
 
-
 const Dashboard = () => {
-    const {logout, currentUser, githubUserDetails, repos, followers, setGithubUser} = useGlobalContext();
+    const {logout, currentUser, githubUserDetails, repos, followers, setGithubUser, getGithubUserData, setGithubUserDetails, setRepos, setFollowers} = useGlobalContext();
     const [error, setError] = useState('');
     const history = useHistory();
 
@@ -21,15 +20,19 @@ const Dashboard = () => {
             setError('');
             await logout();
             setGithubUser('');
+            setGithubUserDetails([]);
+            setRepos([]);
+            setFollowers([]);
             history.push('/login');
         }
         catch{
             setError('Failed to logout.');
         }
     }
+
     return (
         <div className="main-wrapper">
-            <Navbar userName={currentUser.displayName.split(';#')[1]} logoutHandler={logoutHandler} />
+            <Navbar userName={currentUser.displayName.split(';#')[1]} logoutHandler={logoutHandler} getGithubUserData={getGithubUserData} />
             <InfoCards githubUserDetails={githubUserDetails}/>
             <div className="user-followers-container">
                 <User githubUserDetails={githubUserDetails} />
@@ -39,7 +42,7 @@ const Dashboard = () => {
                 <div className="charts__languages"><LanguagesPieChart repos={repos} /></div>
                 <div className="charts__star__projects"><MostPopularBarChart repos={repos} /></div>
             </div>
-        </div>
+        </div> 
     )
 }
 

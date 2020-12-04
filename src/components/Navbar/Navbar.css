@@ -44,19 +44,21 @@ nav{
     padding-right: 0px;
   }
 
-  nav .navbar__nav-items li a{
+  nav .navbar__nav-items li button{
     color: #525252;
     font-size: 16px;
     font-weight: 500;
     text-decoration: none;
-    padding: 5px 9px;
+    padding: 6px 10px;
     background: #525252;
     border-radius: 4px;
     color: #fcfcfc;
+    cursor: pointer;
+    border:none;
   }
-  nav .navbar__nav-items li a:hover{
+  nav .navbar__nav-items li button:hover{
     background:  rgb(124, 124, 124);
-    padding: 4px 8px;
+    padding: 5px 9px;
     border: 1px solid #525252;
   }
   .navbar__form{

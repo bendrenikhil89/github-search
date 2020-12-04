@@ -79,9 +79,8 @@
     outline: none;
     border: none;
     line-height: 1;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #333;
+    font-size: 16px;
+    color: #222558;
   }
   
   .input-field input::placeholder {
@@ -384,4 +383,21 @@
       bottom: 28%;
       left: 50%;
     }
+  }
+
+
+  .signup__alert {
+    width: 100%;
+    max-width: 380px;
+    margin: 10px auto;
+    padding: 10px;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.06),0 2px 5px 0 rgba(0,0,0,.2);
+    font-size: 14px;
+  }
+
+  .signup__danger-alert {
+    background-color: #f7a7a3;
+    border-left: 5px solid #8f130c;
   }

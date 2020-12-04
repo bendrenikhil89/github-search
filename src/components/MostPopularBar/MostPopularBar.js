@@ -11,7 +11,7 @@ const MostPopularBarChart = ({repos}) => {
     objMostPopularCount = objMostPopularCount.sort((a,b) => a.count > b.count ? -1 : 1).slice(0,5);
     const prjNames = objMostPopularCount.map(x => Object.values(x)[0]);
     const starsCount = objMostPopularCount.map(x => Object.values(x)[1]);
-    console.log(prjNames, starsCount);
+    
     const data = {
         labels: prjNames,
         datasets: [

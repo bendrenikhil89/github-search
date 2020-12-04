@@ -1,8 +1,7 @@
 import React, {useState, useRef} from 'react';
 import './Navbar.css';
-import {Link} from 'react-router-dom';
 
-const Navbar = ({userName, logoutHandler}) => {
+const Navbar = ({userName, logoutHandler, getGithubUserData}) => {
     const [searchText, setSearchText] = useState('');
     const menuIconSpanRef = useRef();
     const searchBtnRef = useRef();
@@ -34,6 +33,12 @@ const Navbar = ({userName, logoutHandler}) => {
         cancelBtnRef.current.classList.add("show");
     }
 
+    const searchHandler = () => {
+        if(searchText){
+            getGithubUserData(searchText.trim())
+        }
+    }
+    
     return(
         <div className="navbar__container">
             <nav>
@@ -41,11 +46,11 @@ const Navbar = ({userName, logoutHandler}) => {
                 <div className="navbar__logo"><i className="fab fa-github"></i>Github Search</div>
                 <div className="navbar__form" ref={searchFormRef}>
                     <input type="search" className="navbar__search-data" placeholder="Search Github User" value={searchText} onChange={changeHandler} />
-                    <button type="submit" className="fas fa-search" onClick={logoutHandler}></button>
+                    <button type="submit" className="fas fa-search" onClick={searchHandler}></button>
                 </div>
                 <div className="navbar__nav-items" ref={navItemsRef}>
                     <li>Welcome, {userName}</li>
-                    <li><Link to="/login">Logout</Link></li>
+                    <li><button onClick={logoutHandler}>Logout</button></li>
                 </div>
                 <div className="navbar__search-icon" ref={searchBtnRef} onClick={searchIconHandler}><span className="fas fa-search"></span></div>
                 <div className="navbar__cancel-icon" ref={cancelBtnRef} onClick={cancelIconHandler}><span className="fas fa-times"></span></div>
