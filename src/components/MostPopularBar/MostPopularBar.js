@@ -38,7 +38,7 @@ const MostPopularBarChart = ({repos}) => {
         plugins: {
             labels: {
                 render: 'value',
-                fontSize: 15
+                fontSize: 12
             }
         },
         scales: {
@@ -51,6 +51,11 @@ const MostPopularBarChart = ({repos}) => {
                         }
                         return tick;
                     }
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
                 }
             }]
         }

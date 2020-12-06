@@ -16,6 +16,7 @@ export function ContextDataProvider({children}){
     const [githubUserDetails, setGithubUserDetails] = useState([]);
     const [repos, setRepos] = useState([]);
     const [followers, setFollowers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const [error, setError] = useState({show: false, msg: ''});
 
     function signUp(email, password,githubName, userName){
@@ -38,6 +39,7 @@ export function ContextDataProvider({children}){
 
     async function getGithubUserData(user){
         setLoading(true);
+        setSearchTerm(user);
         setError({show: false, msg: ''});
         const headers= {
             "Authorization" : "Token "+ process.env.REACT_APP_GIT_ACCESS_TOKEN
@@ -48,7 +50,7 @@ export function ContextDataProvider({children}){
                 "headers" : headers
             });
             const resUser = await reqUser.json();
-            if(resUser){
+            if(!resUser.message){
                 setGithubUserDetails(resUser);
                 const { login, followers_url } = resUser;
                 const [dataRepos, dataFollowers] = await Promise.all([
@@ -67,7 +69,7 @@ export function ContextDataProvider({children}){
                 setFollowers(dataFollowers);
             }
             else{
-                setError(true, 'No user found with that username');
+                setError({show:true, msg:'No user found with that username'});
             }
         }
         catch(err){
@@ -82,6 +84,7 @@ export function ContextDataProvider({children}){
             setIsAuthenticated(true);
             if(user && user.displayName !== null){
                 getGithubUserData(user.displayName.split(';#')[0]);
+                setSearchTerm('');
             }
         })
         return unsubscribe;
@@ -90,6 +93,7 @@ export function ContextDataProvider({children}){
     useEffect(() => {
         if(githubUser && githubUser.displayName !== null){
             getGithubUserData(githubUser);
+            setSearchTerm('');
         }
     }, [githubUser])
 
@@ -109,7 +113,8 @@ export function ContextDataProvider({children}){
         repos,
         followers,
         loading,
-        error
+        error,
+        searchTerm
     }
 
     return (

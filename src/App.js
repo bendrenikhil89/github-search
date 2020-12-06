@@ -10,7 +10,7 @@ import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 function App() {
   const {loading} = useGlobalContext();
   return (
-  (!loading ? <Router>
+  (!loading ? <Router basename={process.env.REACT_APP_PUBLIC_URL}>
       <Switch>
         <Route path="/login" exact component={LoginSignUp} />
         <PrivateRoute path="/" exact component={Dashboard} />

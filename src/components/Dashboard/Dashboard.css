@@ -30,3 +30,23 @@
     overflow: hidden;
     height:100%;
 }
+
+ .dashboard__alert {
+    width: 100%;
+    max-width: 1300px;
+    margin: 40px auto -20px auto;
+    padding: 10px;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.06),0 2px 5px 0 rgba(0,0,0,.2);
+    font-size: 14px;
+  }
+
+  .dashboard__alert h3{
+      font-size: 16px;
+  }
+
+  .dashboard__danger-alert {
+    background-color: #ff0c002e;
+    border-left: 5px solid #8f130cb5;
+}

@@ -8,9 +8,9 @@ const Followers = ({followers}) => {
                 Followers
             </div>
             <div className="follower__card__body">
-                {followers.map(follower => {
+                {followers.length > 0 ? followers.map(follower => {
                     return <Follower follower={follower} key={follower.id} />
-                })}
+                }) : <h4 className="follower__none">User has no followers.</h4>}
             </div>
         </div>
     )

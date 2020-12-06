@@ -1,0 +1,113 @@
+.pagenotfound__wrapper{
+    height: 100vh;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#f7f7f7, #f5f5f5);
+}
+
+.pagenotfound__main {
+    text-align: center;
+    z-index: 5;
+}
+
+.pagenotfound__wrapper h1 {
+  font-size: 95px;
+  margin: 0;
+  color:#525252;
+}
+
+.pagenotfound__wrapper p{
+    color:#635e5e;
+    margin-bottom: 20px;
+}
+
+.pagenotfound__redirect {
+    background: linear-gradient(#635e5e, #525252);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 30px 15px rgba(0, 0, 0, 0.15);
+    outline: none;
+    color: #FFF;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .pagenotfound__bubble {
+    background: linear-gradient(#858586, #2e2e35);
+    border-radius: 50%;
+    box-shadow: 0 30px 15px rgba(0, 0, 0, 0.15);
+    position: absolute;
+  }
+  .pagenotfound__bubble:before, .pagenotfound__bubble:after {
+    content: '';
+    background: linear-gradient(#858586, #2e2e35);
+    border-radius: 50%;
+    box-shadow: 0 30px 15px rgba(0, 0, 0, 0.15);
+    position: absolute;
+  }
+  .pagenotfound__bubble:nth-child(1) {
+    top: 15vh;
+    left: 15vw;
+    height: 22vmin;
+    width: 22vmin;
+  }
+  .pagenotfound__bubble:nth-child(1):before {
+    width: 13vmin;
+    height: 13vmin;
+    bottom: -25vh;
+    right: -10vmin;
+  }
+  .pagenotfound__bubble:nth-child(2) {
+    top: 20vh;
+    left: 38vw;
+    height: 10vmin;
+    width: 10vmin;
+  }
+  .pagenotfound__bubble:nth-child(2):before {
+    width: 5vmin;
+    height: 5vmin;
+    bottom: -10vh;
+    left: -8vmin;
+  }
+  .pagenotfound__bubble:nth-child(3) {
+    top: 12vh;
+    right: 30vw;
+    height: 13vmin;
+    width: 13vmin;
+  }
+  .pagenotfound__bubble:nth-child(3):before {
+    width: 3vmin;
+    height: 3vmin;
+    bottom: -15vh;
+    left: -18vmin;
+    z-index: 6;
+  }
+  .pagenotfound__bubble:nth-child(4) {
+    top: 25vh;
+    right: 18vw;
+    height: 18vmin;
+    width: 18vmin;
+  }
+  .pagenotfound__bubble:nth-child(4):before {
+    width: 7vmin;
+    height: 7vmin;
+    bottom: -10vmin;
+    left: -15vmin;
+  }
+  .pagenotfound__bubble:nth-child(5) {
+    top: 60vh;
+    right: 18vw;
+    height: 28vmin;
+    width: 28vmin;
+  }
+  .pagenotfound__bubble:nth-child(5):before {
+    width: 10vmin;
+    height: 10vmin;
+    bottom: 5vmin;
+    left: -25vmin;
+  }
+  

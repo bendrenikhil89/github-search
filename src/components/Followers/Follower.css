@@ -10,6 +10,7 @@
     width:100%;
     border-bottom: 1px solid #ccc;
     background: #fff;
+    font-weight: bold;
 }
 
 .follower__card__body{
@@ -17,7 +18,7 @@
     width:100%;
     background: #fff;
     height: 100%;
-    max-height: 260px;
+    max-height: 280px;
 }
 
 .follower__card__body:hover{
@@ -74,7 +75,7 @@
     border: 1px solid #2a92e6;
 }
 
-.follower__card__body::before {
+/* .follower__card__body::before {
     content: "";
     position: absolute;
     background: linear-gradient(to right, #7ebff50d, #047edf0f 99%) !important;
@@ -82,12 +83,45 @@
     height: 520px;
     z-index: 0;
     transform: rotate(42deg);
-    right: -133px;
-    top: -53px;
+    right: -100px;
+    top: -30px;
     border-radius: 35px;
     overflow: hidden;
+} */
+
+.follower__name__details, .follower__none{
+    font-size: 15px;
 }
 
-.follower__name__details{
-    font-size: 15px;
+@media screen and (max-width:600px){
+    .follower__photo{
+        flex-direction: column;
+    }
+
+    .follower__follow{
+        justify-content: flex-start;
+        margin-top:10px;
+    }
+
+    .follower__name__details{
+        margin-top:10px;
+    }
+
+    .follower__photo__row{
+        overflow-x:hidden;
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width:864px) and (max-width:1150px){
+    .follower__photo__row{
+        flex-direction: column;
+    }
+    .follower__card__body{
+        overflow-x:hidden;
+    }
+    .follower__follow{
+        justify-content: flex-start;
+        margin-left: 75px;
+    }
 }

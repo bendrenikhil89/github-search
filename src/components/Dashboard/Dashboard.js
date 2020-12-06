@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useGlobalContext} from '../../context/ContextData';
 import {useHistory} from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
@@ -10,14 +10,12 @@ import LanguagesPieChart from '../LanguagesPieChart/LanguagesPieChart';
 import MostPopularBarChart from '../MostPopularBar/MostPopularBar';
 
 const Dashboard = () => {
-    const {logout, currentUser, githubUserDetails, repos, followers, setGithubUser, getGithubUserData, setGithubUserDetails, setRepos, setFollowers} = useGlobalContext();
-    const [error, setError] = useState('');
+    const {logout, currentUser, githubUserDetails, repos, followers, setGithubUser, getGithubUserData, setGithubUserDetails, setRepos, setFollowers, error, searchTerm} = useGlobalContext();
     const history = useHistory();
 
     async function logoutHandler(e) {
         e.preventDefault();
         try{
-            setError('');
             await logout();
             setGithubUser('');
             setGithubUserDetails([]);
@@ -25,14 +23,17 @@ const Dashboard = () => {
             setFollowers([]);
             history.push('/login');
         }
-        catch{
-            setError('Failed to logout.');
+        catch(error){
+            alert(error.message);
         }
     }
 
     return (
         <div className="main-wrapper">
-            <Navbar userName={currentUser.displayName.split(';#')[1]} logoutHandler={logoutHandler} getGithubUserData={getGithubUserData} />
+            <Navbar userName={currentUser.displayName.split(';#')[1]} logoutHandler={logoutHandler} getGithubUserData={getGithubUserData} searchTerm={searchTerm} />
+            {error.show ? <div className="dashboard__alert dashboard__danger-alert">
+                <h3>{error.msg}</h3>
+            </div> : null}
             <InfoCards githubUserDetails={githubUserDetails}/>
             <div className="user-followers-container">
                 <User githubUserDetails={githubUserDetails} />

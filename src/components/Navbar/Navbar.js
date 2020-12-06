@@ -1,7 +1,7 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import './Navbar.css';
 
-const Navbar = ({userName, logoutHandler, getGithubUserData}) => {
+const Navbar = ({userName, logoutHandler, getGithubUserData, searchTerm}) => {
     const [searchText, setSearchText] = useState('');
     const menuIconSpanRef = useRef();
     const searchBtnRef = useRef();
@@ -38,7 +38,11 @@ const Navbar = ({userName, logoutHandler, getGithubUserData}) => {
             getGithubUserData(searchText.trim())
         }
     }
-    
+
+    useEffect(() => {
+        setSearchText(searchTerm);
+    }, [searchTerm]);
+
     return(
         <div className="navbar__container">
             <nav>

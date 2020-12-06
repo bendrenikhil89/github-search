@@ -38,6 +38,22 @@ const LoginSignUp = () => {
         if(signUpPasswordRef.current.value !== signUpPasswordConfirmRef.current.value){
             return setError('Passwords do not match.');
         }
+        const headers= {
+            "Authorization" : "Token "+ process.env.REACT_APP_GIT_ACCESS_TOKEN
+        };
+        try{
+            const reqUser = await fetch(`https://api.github.com/users/${signUpGithubNameRef.current.value}`, {
+                "method": "GET",
+                "headers" : headers
+            });
+            const resUser = await reqUser.json();
+            if(resUser.message){
+                return setError('Github username is invalid.');
+            }
+        }
+        catch(error){
+            return setError('Request to validate github username failed.');
+        }
         try {
             setError('');
             setSubmit(true);
