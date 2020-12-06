@@ -58,6 +58,9 @@ const MostPopularBarChart = ({repos}) => {
                     beginAtZero: true
                 }
             }]
+        },
+        legend: {
+            display: false
         }
     }
 
