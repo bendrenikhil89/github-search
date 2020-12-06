@@ -4,17 +4,9 @@ import './LoginSignUp.css';
 import log from '../../assets/images/log.svg';
 import register from '../../assets/images/register.svg';
 import { useGlobalContext } from '../../context/ContextData';
+import contentfulclient from '../../client/contentfulclient';
 
-const elContainer = document.getElementsByClassName('container');
-const signInToggle = e => {
-    elContainer[0].classList.add('sign-in-mode');
-    elContainer[0].classList.remove('sign-up-mode');
-}
 
-const signUpToggle = e => {
-    elContainer[0].classList.add('sign-up-mode')
-    elContainer[0].classList.remove('sign-in-mode');
-}
 
 const LoginSignUp = () => {
     const signInEmailRef = useRef();
@@ -33,14 +25,36 @@ const LoginSignUp = () => {
     
     const history = useHistory();
 
+
+    const elContainer = document.getElementsByClassName('container');
+    const signInToggle = e => {
+        setError('');
+        elContainer[0].classList.add('sign-in-mode');
+        elContainer[0].classList.remove('sign-up-mode');
+    }
+
+    const signUpToggle = e => {
+        setError('');
+        elContainer[0].classList.add('sign-up-mode')
+        elContainer[0].classList.remove('sign-in-mode');
+    }
+
     async function signUpHandler(e) {
         e.preventDefault();
         if(signUpPasswordRef.current.value !== signUpPasswordConfirmRef.current.value){
+           
             return setError('Passwords do not match.');
         }
+        var getToken = contentfulclient.getEntries({
+            content_type: 'store'
+        });
+
+        var token = await getToken;
+
         const headers= {
-            "Authorization" : "Token "+ process.env.REACT_APP_GIT_ACCESS_TOKEN
+            "Authorization" : "Token "+ token.items[0].fields.value
         };
+
         try{
             const reqUser = await fetch(`https://api.github.com/users/${signUpGithubNameRef.current.value}`, {
                 "method": "GET",

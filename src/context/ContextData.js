@@ -1,5 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {auth} from '../client/firebase';
+import contentfulclient from '../client/contentfulclient';
 
 const GlobalContextProvider = React.createContext();
 
@@ -41,8 +42,15 @@ export function ContextDataProvider({children}){
         setLoading(true);
         setSearchTerm(user);
         setError({show: false, msg: ''});
+
+        var getToken = contentfulclient.getEntries({
+            content_type: 'store'
+        });
+
+        var token = await getToken;
+
         const headers= {
-            "Authorization" : "Token "+ process.env.REACT_APP_GIT_ACCESS_TOKEN
+            "Authorization" : "Token "+ token.items[0].fields.value
         };
         try{
             const reqUser = await fetch(`https://api.github.com/users/${user}`, {
